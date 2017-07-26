@@ -2,9 +2,9 @@
 
 namespace IslahVoice.Views
 {
-    public partial class MainPage : ContentPage
+    public partial class About : ContentPage
     {
-        public MainPage()
+        public About()
         {
             InitializeComponent();
         }

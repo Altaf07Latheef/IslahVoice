@@ -12,14 +12,20 @@ namespace IslahVoice
         {
             InitializeComponent();
 
-            NavigationService.NavigateAsync("NavigationPage/MainPage?title=Hello%20from%20Xamarin.Forms");
+            //NavigationService.NavigateAsync("NavigationPage/MainPage");
+            NavigationService.NavigateAsync("MasterPage/NavigationPage/LatestSpeech");
         }
 
         protected override void RegisterTypes()
         {
             Container.RegisterTypeForNavigation<NavigationPage>();
-            Container.RegisterTypeForNavigation<MainPage>();
+            Container.RegisterTypeForNavigation<LatestSpeech>();
             Container.RegisterTypeForNavigation<MasterPage>();
+            Container.RegisterTypeForNavigation<Subjects>();
+            Container.RegisterTypeForNavigation<Orators>();
+            Container.RegisterTypeForNavigation<Downloads>();
+            Container.RegisterTypeForNavigation<About>();
+            Container.RegisterTypeForNavigation<SpeechList>();
         }
     }
 }

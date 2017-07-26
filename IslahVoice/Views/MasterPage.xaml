@@ -7,12 +7,13 @@
                   Title="Menu">
 
     <MasterDetailPage.Master>
-        <ContentPage Title="Master Page">
-            <StackLayout Orientation="Vertical">
-                <Button Text="Subjects" Command="{Binding NavigationCommand}"/>
-                <Button Text="Orators" Command="{Binding NavigationCommand}"/>
-                <Button Text="Download" Command="{Binding NavigationCommand}"/>
-                <Button Text="About" Command="{Binding NavigationCommand}"/>
+        <ContentPage Title="Master Page" BackgroundColor="White">
+            <StackLayout Orientation="Vertical" >
+                <BoxView BackgroundColor="Green" HeightRequest="200"/>
+                <Button Text="Subjects" Command="{Binding NavigationCommand}" CommandParameter="NavigationPage/Subjects" FontSize="Medium" FontAttributes="Bold" BackgroundColor="White" BorderColor="White"/>
+                <Button Text="Orators" Command="{Binding NavigationCommand}" CommandParameter="NavigationPage/Orators" FontSize="Medium" FontAttributes="Bold" BackgroundColor="White" BorderColor="White"/>
+                <Button Text="Downloads" Command="{Binding NavigationCommand}" CommandParameter="NavigationPage/Downloads" FontSize="Medium" FontAttributes="Bold" BackgroundColor="White" BorderColor="White"/>
+                <Button Text="About" Command="{Binding NavigationCommand}" CommandParameter="NavigationPage/About" FontSize="Medium" FontAttributes="Bold" BackgroundColor="White" BorderColor="White"/>
             </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>
