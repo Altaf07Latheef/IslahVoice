@@ -5,5 +5,51 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="IslahVoice.Views.Orators"
              Title="Orators">
-  
+
+    <ListView ItemsSource="{Binding orators}" HasUnevenRows="True" SeparatorVisibility="None">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Orientation="Vertical">
+                        <!--<Label Text="{Binding categoryName}"/>-->
+                        <Frame IsClippedToBounds="True"
+         HasShadow="True"
+         BackgroundColor="White" >
+                            <Frame.OutlineColor>
+                                <OnPlatform x:TypeArguments="Color"
+                  Android="Gray"
+                  iOS="Gray"/>
+                            </Frame.OutlineColor>
+                            <Frame.Margin>
+                                <OnPlatform x:TypeArguments="Thickness"
+                  Android="7" iOS="7"/>
+                            </Frame.Margin>
+                            <Frame.Padding>
+                                <OnPlatform x:TypeArguments="Thickness"
+                  Android="0" iOS="0"/>
+                            </Frame.Padding>
+                            <StackLayout Orientation="Horizontal">
+                                <BoxView Color="Green" WidthRequest="6"/>
+                                <Grid VerticalOptions="CenterAndExpand"
+            Padding="0"
+            HorizontalOptions="FillAndExpand"
+            BackgroundColor="Transparent">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Label FontAttributes="Bold"
+               Grid.Row="0"
+               Margin="15,0,0,0"
+               VerticalTextAlignment="Center"
+               FontSize="16"
+               Text="{Binding categoryName}"/>
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+    
 </ContentPage>

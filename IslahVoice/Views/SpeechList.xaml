@@ -4,18 +4,80 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="IslahVoice.Views.SpeechList"
-             Title="List of Speeches">
+             xmlns:control="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             Title="List of Speeches"
+             BackgroundColor="White">
 
-    <ListView x:Name="ListOfSpeeches" ItemsSource="{Binding list}">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <StackLayout Orientation="Vertical">
-                        <Label Text="{Binding afilename}"/>
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
-  
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="ListOfSpeeches" ItemsSource="{Binding list}" Grid.Row="0" Grid.ColumnSpan="3" SelectedItem="{Binding SelectedAudioItem}" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Vertical">
+                            <!--<Label Text="{Binding afilename}"/>-->
+                            <Frame IsClippedToBounds="True"
+         HasShadow="True"
+         BackgroundColor="White" >
+                                <Frame.OutlineColor>
+                                    <OnPlatform x:TypeArguments="Color"
+                  Android="Gray"
+                  iOS="Gray"/>
+                                </Frame.OutlineColor>
+                                <Frame.Margin>
+                                    <OnPlatform x:TypeArguments="Thickness"
+                  Android="5" iOS="5"/>
+                                </Frame.Margin>
+                                <Frame.Padding>
+                                    <OnPlatform x:TypeArguments="Thickness"
+                  Android="0" iOS="0"/>
+                                </Frame.Padding>
+                                <StackLayout Orientation="Horizontal">
+                                    <!--<BoxView Color="Green" WidthRequest="6"/>-->
+                                    <Grid VerticalOptions="CenterAndExpand"
+            Padding="0"
+            HorizontalOptions="FillAndExpand"
+            BackgroundColor="Transparent">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Label FontAttributes="Bold"
+               Grid.Row="0"
+               Margin="15,0,0,0"
+               VerticalTextAlignment="Center"
+               FontSize="16"
+               Text="{Binding afilename}"/>
+                                    </Grid>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <control:ImageButton Grid.Row="1" Grid.Column="2" BackgroundColor="White" HeightRequest="50" VerticalOptions="Center" WidthRequest="50" 
+                             x:Name="DownloadButton" Command="{Binding DownloadButton}" Source="downloadbtn" ImageHeightRequest="50" 
+                             ImageWidthRequest="50" HorizontalOptions="Center" />
+        <ProgressBar x:Name="ProgressBar" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        <control:ImageButton Grid.Row="2" Grid.Column="0" BackgroundColor="White" HeightRequest="50" VerticalOptions="Center" WidthRequest="50" 
+                             x:Name="PlayButton" Command="{Binding PlayButton}" Source="playbtn" ImageHeightRequest="50" ImageWidthRequest="50" 
+                             HorizontalOptions="Center" />
+        <control:ImageButton Grid.Row="2" Grid.Column="1" BackgroundColor="White" HeightRequest="50" VerticalOptions="Center" WidthRequest="50" 
+                             x:Name="PauseButton" Command="{Binding PauseButton}" Source="pausebtn" ImageHeightRequest="50" ImageWidthRequest="50" 
+                             HorizontalOptions="Center"/>
+        <control:ImageButton Grid.Row="2" Grid.Column="2" BackgroundColor="White" HeightRequest="50" VerticalOptions="Center" WidthRequest="50" 
+                             x:Name="StopButton" Command="{Binding StopButton}" Source="stopbtn" ImageHeightRequest="50" ImageWidthRequest="50" 
+                             HorizontalOptions="Center"/>
+
+    </Grid>
 </ContentPage>

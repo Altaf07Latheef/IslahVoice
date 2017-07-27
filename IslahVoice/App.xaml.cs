@@ -1,6 +1,7 @@
 ﻿using Prism.Unity;
 using IslahVoice.Views;
 using Xamarin.Forms;
+using IslahVoice.ViewModels;
 
 namespace IslahVoice
 {
@@ -26,6 +27,7 @@ namespace IslahVoice
             Container.RegisterTypeForNavigation<Downloads>();
             Container.RegisterTypeForNavigation<About>();
             Container.RegisterTypeForNavigation<SpeechList>();
+         //   Container.RegisterTypeForNavigation<SpeechList, AudioViewModel>();
         }
     }
 }
