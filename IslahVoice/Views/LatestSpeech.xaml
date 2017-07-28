@@ -28,7 +28,7 @@
                   Android="0" iOS="0"/>
                             </Frame.Padding>
                             <StackLayout Orientation="Horizontal">
-                                <BoxView Color="Blue" WidthRequest="6" VerticalOptions="FillAndExpand" />
+                                <!--<BoxView Color="Blue" WidthRequest="6" VerticalOptions="FillAndExpand" />-->
 
                                 <Grid VerticalOptions="CenterAndExpand"
             Padding="0"
@@ -42,9 +42,10 @@
                Margin="10,0,0,0"
                VerticalTextAlignment="Center"
                FontSize="17"
-               Text="{Binding pitem}"/>
+               Text="{Binding pitem}"   />
+                                  
                                 </Grid>
-                                <BoxView Color="Blue" WidthRequest="6" VerticalOptions="FillAndExpand" />
+                                <!--<BoxView Color="Blue" WidthRequest="6" VerticalOptions="FillAndExpand" />-->
                             </StackLayout>
                         </Frame>
                     </StackLayout>

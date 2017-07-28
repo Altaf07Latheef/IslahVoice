@@ -1,4 +1,7 @@
-﻿using IslahVoice.Model;
+﻿using IslahVoice.Interface;
+using IslahVoice.Model;
+using Plugin.DownloadManager;
+using Plugin.DownloadManager.Abstractions;
 using Plugin.MediaManager;
 using Plugin.MediaManager.Abstractions;
 using Prism.Commands;
@@ -6,6 +9,7 @@ using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -18,7 +22,8 @@ namespace IslahVoice.ViewModels
         private DelegateCommand pauseButton { get; set; }
         private DelegateCommand stopButton { get; set; }
         private DelegateCommand playButton { get; set; }
-
+        private DelegateCommand downloadButton { get; set; }
+        public string filename= null;
 
         private IPlaybackController PlaybackController => CrossMediaManager.Current.PlaybackController;
         INavigationService _navigationService;
@@ -28,8 +33,17 @@ namespace IslahVoice.ViewModels
             speechList = new Post();
 
             playButton = new DelegateCommand(async () => await PlaybackController.Play());
-
+            pauseButton = new DelegateCommand(async () => await PlaybackController.Pause());
             stopButton = new DelegateCommand(async () => await PlaybackController.Stop());
+          
+        }
+
+        public DelegateCommand DownloadButton
+        {
+            get {
+                
+                return downloadButton = new DelegateCommand(() => StartDownloading(filename));
+            }
         }
 
         public DelegateCommand PlayButton
@@ -39,7 +53,7 @@ namespace IslahVoice.ViewModels
 
         public DelegateCommand PauseButton
         {
-            get { return pauseButton = new DelegateCommand(async () => await PlaybackController.Pause()); }
+            get { return pauseButton; }
         }
 
         public DelegateCommand StopButton
@@ -57,17 +71,27 @@ namespace IslahVoice.ViewModels
             {
                 if (value != null)
                 {
-                    //var parameter = new NavigationParameters();
-                    //parameter.Add("Audio", value.afilename);
-                    //_navigationService.NavigateAsync(new Uri("AudioViewModel", UriKind.Relative), parameter);
-                    CrossMediaManager.Current.Play("http://islahvoice.com/media/k2/attachments/" + value.afilename);
-                    ////IsPlaying = true;
-                    ////PlayButton = new Command(async () => await PlaybackController.Play());
-                    ////PauseButton = new Command(async () => await PlaybackController.Pause());
-                    ////StopButton = new Command(async () => await PlaybackController.Stop());
+                    filename = value.afilename;
+                    
+                    CrossMediaManager.Current.Play("http://islahvoice.com/media/k2/attachments/" + filename);
+                    //downloadButton = new DelegateCommand( () => StartDownloading(value.afilename));
                 }
             }
         }
+        
+        
+        private void StartDownloading(string filename)
+        {
+            var downloadManager = CrossDownloadManager.Current;
+           downloadManager.PathNameForDownloadedFile = new Func<IDownloadFile, string>(x => {
+                 return   DependencyService.Get<IDownloadSpeech>().GetDownloadFile(filename);
+            });
+                var file = downloadManager.CreateDownloadFile("http://islahvoice.com/media/k2/attachments/" + filename);
+            downloadManager.Start(file);
+           
+        }
+
+        
 
         public override void OnNavigatedFrom(NavigationParameters parameters)
         {
@@ -91,5 +115,6 @@ namespace IslahVoice.ViewModels
         {
             base.OnNavigatedTo(parameters);
         }
+
     }
 }
