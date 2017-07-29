@@ -9,11 +9,12 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using IslahVoice.Interface;
+
 using System.IO;
 using Plugin.DownloadManager;
 using Plugin.DownloadManager.Abstractions;
 using IslahVoice.Droid;
+using IslahVoice.Interface;
 
 [assembly: Xamarin.Forms.Dependency(typeof(FileDownload))]
 namespace IslahVoice.Droid

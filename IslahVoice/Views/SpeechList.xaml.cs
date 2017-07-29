@@ -18,5 +18,10 @@ namespace IslahVoice.Views
                  ListOfSpeeches.SelectedItem = null;
              };
         }
+
+        private void Slider_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            e.
+        }
     }
 }

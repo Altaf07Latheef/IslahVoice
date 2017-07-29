@@ -39,7 +39,8 @@
                                 </Frame.Padding>
                                 <StackLayout Orientation="Horizontal">
                                     <!--<BoxView Color="Green" WidthRequest="6"/>-->
-                                    <Grid VerticalOptions="CenterAndExpand"
+                                    <Grid x:Name="item" 
+                                        VerticalOptions="CenterAndExpand"
             Padding="0"
             HorizontalOptions="FillAndExpand"
             BackgroundColor="Transparent">
@@ -47,19 +48,20 @@
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="8*"/>
-                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="9*"/>
+                                            <ColumnDefinition Width="1*"/>
                                         </Grid.ColumnDefinitions>
                                         <Label FontAttributes="Bold"
                Grid.Row="0"
-               Grid.Column="0"                                
-               Margin="15,0,0,0"
+               Margin="10,0,0,0"                             
                VerticalTextAlignment="Center"
                FontSize="16"
                Text="{Binding afilename}"/>
-                                        <control:ImageButton Grid.Row="0" Grid.Column="1" BackgroundColor="White" HeightRequest="50" VerticalOptions="Center" WidthRequest="50" 
-                             x:Name="DownloadButton" Command="{Binding DownloadButton}" Source="downloadbtn" ImageHeightRequest="40" 
-                             ImageWidthRequest="40" HorizontalOptions="Center" Margin="0,0,5,0" />
+                                        <control:ImageButton Grid.Row="0" Grid.Column="3" BackgroundColor="White" HeightRequest="50" VerticalOptions="Center" WidthRequest="50" 
+                             x:Name="DownloadButton" Command="{Binding BindingContext.DownloadButton, Source={x:Reference ListOfSpeeches}}" Source="downloadbtn" ImageHeightRequest="40" 
+                             ImageWidthRequest="40" HorizontalOptions="Center" CommandParameter="{Binding}" Margin="0,0,20,0"/>
+
+                                                             
                                     </Grid>
                                 </StackLayout>
                             </Frame>
@@ -73,7 +75,8 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ProgressBar x:Name="ProgressBar" Grid.Row="1" Grid.ColumnSpan="3" Margin="10,0,10,0" Progress="{Bingding Progress}"/>
+        <Slider x:Name="Slider" Grid.Row="1" Grid.ColumnSpan="3" Margin="10,0,10,0" Minimum="0" Maximum="{Binding Maximum}" Value="{Binding Duration}"
+                ValueChanged="Slider_ValueChanged"/>
         <control:ImageButton Grid.Row="2" Grid.Column="0" BackgroundColor="White" HeightRequest="50" VerticalOptions="Center" WidthRequest="50" 
                              x:Name="PlayButton" Command="{Binding PlayButton}" Source="playbtn" ImageHeightRequest="50" ImageWidthRequest="50" 
                              HorizontalOptions="Center" />
@@ -83,6 +86,6 @@
         <control:ImageButton Grid.Row="2" Grid.Column="2" BackgroundColor="White" HeightRequest="50" VerticalOptions="Center" WidthRequest="50" 
                              x:Name="StopButton" Command="{Binding StopButton}" Source="stopbtn" ImageHeightRequest="50" ImageWidthRequest="50" 
                              HorizontalOptions="Center"/>
-
+        
     </Grid>
 </ContentPage>
